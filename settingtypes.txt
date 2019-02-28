@@ -1,0 +1,10 @@
+#    If true certain functions will be nulled to allow for playability in older minetest versions
+old_compatible (Minetest 0.4.17 Compatibility) bool false
+
+#    If true certain functions will be activated to allow for playability in new minetest versions
+new_compatible (Minetest 5.0.0 Compatibility) bool false
+
+
+#    If true all animals will spawn in the wild
+wild_spawning (Wild Spawning) bool false
+
