@@ -3,6 +3,7 @@ paleotest = {}
 local path = minetest.get_modpath("paleotest")
 
 -- PaleoTest Blocks
+dofile(path .. "/nodes.lua")
 dofile(path .. "/fossil_analyzer.lua")
 dofile(path .. "/dna_cultivator.lua")
 dofile(path .. "/fossils.lua")
