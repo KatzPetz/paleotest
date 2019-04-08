@@ -1,5 +1,6 @@
-cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Mosasaurus"}
-cores2={"Mammoth","Elasmotherium","Smilodon","Direwolf","Procoptodon","Thylacoleo"}
+cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor"}
+cores2={"Mammoth","Elasmotherium","Smilodon","Direwolf","Procoptodon","Thylacoleo","Mosasaurus","Elasmosaurus","Dunkleosteus"}
+
 local dna_cultivator_fs = "size[8,7]"
     .."image[3.25,1.75;1.7,.5;paleotest_progress_bar.png^[transformR270]"
     .."list[current_player;main;0,3;8,4;]"

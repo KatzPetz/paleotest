@@ -29,7 +29,9 @@ dofile(path .. "/thylacoleo.lua")
 dofile(path .. "/dire_wolf.lua")
 
 -- PaleoTest Aquatic Animals
+dofile(path .. "/dunkleosteus.lua")
+dofile(path .. "/elasmosaurus.lua")
 dofile(path .. "/mosasaurus.lua")
 
 
-minetest.log("action", "[MOD] PaleoTest loaded")
+minetest.log("action", "[MOD] PaleoTest v0.4 loaded")

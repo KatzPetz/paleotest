@@ -18,3 +18,14 @@ default.register_fence_rail("paleotest:dinosaur_fence", {
 
 walls.register("paleotest:steel", "Steel Wall", {"default_steel_block.png"},
 		"default:steelblock", default.node_sound_metal_defaults())
+
+-- Crafting
+
+minetest.register_craft({
+	output = "paleotest:dinosaur_fence 64",
+	recipe = {
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		{"", "default:mese_crystal", ""},
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"}
+	}
+})
