@@ -34,4 +34,4 @@ dofile(path .. "/elasmosaurus.lua")
 dofile(path .. "/mosasaurus.lua")
 
 
-minetest.log("action", "[MOD] PaleoTest v0.4 loaded")
+minetest.log("action", "[MOD] PaleoTest v0.41 loaded")
