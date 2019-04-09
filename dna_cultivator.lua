@@ -1,6 +1,6 @@
-cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor"}
+cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Pteranodon"}
 cores2={"Mammoth","Elasmotherium","Smilodon","Direwolf","Procoptodon","Thylacoleo","Mosasaurus","Elasmosaurus","Dunkleosteus"}
-
+cores3={"Horsetails","Cycad"}
 local dna_cultivator_fs = "size[8,7]"
     .."image[3.25,1.75;1.7,.5;paleotest_progress_bar.png^[transformR270]"
     .."list[current_player;main;0,3;8,4;]"
@@ -150,6 +150,9 @@ minetest.register_craft({
 })
 
 -- Recipe Registration
+for n,cor in ipairs(cores3) do
+dna_cultivator.register_recipe("paleotest:"..cor.."_dna", "paleotest:"..cor.."")
+end
 for n,cor in ipairs(cores2) do
 dna_cultivator.register_recipe("paleotest:"..cor.."_dna", "paleotest:"..cor.."_baby")
 end

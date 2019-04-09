@@ -1,5 +1,6 @@
-cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Mosasaurus","Elasmosaurus","Dunkleosteus"}
+cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Mosasaurus","Elasmosaurus","Dunkleosteus","Pteranodon"}
 cores2={"Mammoth","Elasmotherium","Smilodon","Direwolf","Procoptodon","Thylacoleo"}
+cores3={"Horsetails","Cycad"}
 local fossil_analyzer_fs = "size[8,7]"
     .."image[3.28,1.75;1.5,.5;paleotest_progress_bar.png^[transformR270]"
     .."list[current_player;main;0,3;8,4;]"
@@ -149,6 +150,9 @@ minetest.register_craft({
 })
 
 -- Recipe Registration
+for n,cor in ipairs(cores3) do
+fossil_analyzer.register_recipe("paleotest:"..cor.."_fossil", "paleotest:"..cor.."_dna")
+end
 for n,cor in ipairs(cores2) do
 fossil_analyzer.register_recipe("paleotest:"..cor.."_bone", "paleotest:"..cor.."_dna")
 end

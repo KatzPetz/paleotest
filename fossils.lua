@@ -1,5 +1,4 @@
-cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Mosasaurus","Elasmosaurus","Dunkleosteus"}
-
+cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Mosasaurus","Elasmosaurus","Dunkleosteus","Horsetails","Cycad","Pteranodon"}
 
 -- Fossil Definition
 for n,cor in ipairs(cores) do
@@ -108,6 +107,66 @@ minetest.register_abm({
 	action = function(pos)
 		pos.y=pos.y+0
 		minetest.add_node(pos, {name="paleotest:Velociraptor_fossil_block"})
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"paleotest:fossil_block"},
+	interval = 0.1,
+	chance = 100,
+	action = function(pos)
+		pos.y=pos.y+0
+		minetest.add_node(pos, {name="paleotest:Mosasaurus_fossil_block"})
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"paleotest:fossil_block"},
+	interval = 0.1,
+	chance = 100,
+	action = function(pos)
+		pos.y=pos.y+0
+		minetest.add_node(pos, {name="paleotest:Dunkleosteus_fossil_block"})
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"paleotest:fossil_block"},
+	interval = 0.1,
+	chance = 100,
+	action = function(pos)
+		pos.y=pos.y+0
+		minetest.add_node(pos, {name="paleotest:Elasmosaurus_fossil_block"})
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"paleotest:fossil_block"},
+	interval = 0.1,
+	chance = 100,
+	action = function(pos)
+		pos.y=pos.y+0
+		minetest.add_node(pos, {name="paleotest:Pteranodon_fossil_block"})
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"paleotest:fossil_block"},
+	interval = 0.1,
+	chance = 100,
+	action = function(pos)
+		pos.y=pos.y+0
+		minetest.add_node(pos, {name="paleotest:Cycad_fossil_block"})
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"paleotest:fossil_block"},
+	interval = 0.1,
+	chance = 100,
+	action = function(pos)
+		pos.y=pos.y+0
+		minetest.add_node(pos, {name="paleotest:Horsetails_fossil_block"})
 	end,
 })
 
