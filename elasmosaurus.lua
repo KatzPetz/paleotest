@@ -110,58 +110,19 @@ end
 
 mobs:register_egg("paleotest:elasmosaurus", S("Elasmosaurus"), "default_water.png", 1)
 
--- Elasmosaurus Egg by ElCeejo
+-- Elasmosaurus Baby by ElCeejo
 
-mobs:register_mob("paleotest:Elasmosaurus_egg", {
-	type = "nil",
-	hp_min = 5,
-	hp_max = 5,
-	armor = 200,
-	passive = true,
-	walk_velocity = 0,
-	run_velocity = 0,
-	jump = false,
-	runaway = false,
-        pushable = true,
-	fear_height = 5,
-	fall_damage = 0,
-	fall_speed = -8,
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 0,
-	collisionbox = {-0.2, -0.5, -0.2, 0.2, 0, 0.2},
-	visual = "mesh",
-	mesh = "paleotest_egg.b3d",
-	textures = {
-		{"paleotest_egg1.png"},
-	},
-	makes_footstep_sound = false,
-	animation = {
-		speed_normal = 1,
-		stand_start = 1,
-		stand_end = 1,
-		walk_start = 1,
-		walk_end = 1,
-	},
-
-	do_custom = function(self, dtime)
-
-		self.egg_timer = (self.egg_timer or 120) + dtime
-		if self.egg_timer < 120 then
-			return
-		end
-		self.egg_timer = 120
-
-		if self.child
-		or math.random(1, 100) > 1 then
-			return
-		end
-
-		local pos = self.object:get_pos()
-
-		mob = minetest.add_entity(pos, "paleotest:elasmosaurus")
+minetest.register_craftitem("paleotest:Elasmosaurus_baby", {
+	description = "Elasmosaurus Hatchling",
+	inventory_image = "mobs_chicken_egg.png",
+	wield_image = "mobs_chicken_egg.png",
+	stack_max = 1,
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
+		pos1.y=pos1.y+1.5
+		core.after(0.1, function()
+		mob = minetest.add_entity(pos1, "paleotest:elasmosaurus")
                 ent2 = mob:get_luaentity()
-		self.object:remove()
 
 		mob:set_properties({
 			textures = ent2.child_texture[1],
@@ -181,8 +142,8 @@ mobs:register_mob("paleotest:Elasmosaurus_egg", {
 
 		ent2.child = true
 		ent2.tamed = false
-	end
+		end)
+		itemstack:take_item()
+		return itemstack
+	end,
 })
-
-
-mobs:register_egg("paleotest:Elasmosaurus_egg", S("Elasmosaurus Egg"), "paleotest_egg1_inv.png", 0)
