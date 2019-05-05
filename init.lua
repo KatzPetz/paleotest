@@ -28,12 +28,12 @@ dofile(path .. "/smilodon.lua")
 dofile(path .. "/thylacoleo.lua")
 dofile(path .. "/dire_wolf.lua")
 
--- PaleoTest Aquatic Animals
+-- PaleoTest Reptiles
 dofile(path .. "/dunkleosteus.lua")
 dofile(path .. "/elasmosaurus.lua")
 dofile(path .. "/mosasaurus.lua")
-
+dofile(path .. "/sarcosuchus.lua)
 dofile(path .. "/pteranodon.lua")
 
 
-minetest.log("action", "[MOD] PaleoTest v1.0 loaded")
+minetest.log("action", "[MOD] PaleoTest v1.1 loaded")
