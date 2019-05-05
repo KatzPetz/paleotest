@@ -1,4 +1,4 @@
-cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Pteranodon"}
+cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Pteranodon","Sarcosuchus"}
 cores2={"Mammoth","Elasmotherium","Smilodon","Direwolf","Procoptodon","Thylacoleo","Mosasaurus","Elasmosaurus","Dunkleosteus"}
 cores3={"Horsetails","Cycad"}
 local dna_cultivator_fs = "size[8,7]"

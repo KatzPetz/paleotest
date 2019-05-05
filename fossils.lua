@@ -1,4 +1,4 @@
-cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Mosasaurus","Elasmosaurus","Dunkleosteus","Horsetails","Cycad","Pteranodon"}
+cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Sarcosuchus","Mosasaurus","Elasmosaurus","Dunkleosteus","Horsetails","Cycad","Pteranodon"}
 
 -- Fossil Definition
 for n,cor in ipairs(cores) do
@@ -137,6 +137,16 @@ minetest.register_abm({
 	action = function(pos)
 		pos.y=pos.y+0
 		minetest.add_node(pos, {name="paleotest:Elasmosaurus_fossil_block"})
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"paleotest:fossil_block"},
+	interval = 0.1,
+	chance = 100,
+	action = function(pos)
+		pos.y=pos.y+0
+		minetest.add_node(pos, {name="paleotest:Sarcosuchus_fossil_block"})
 	end,
 })
 

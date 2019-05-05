@@ -1,4 +1,4 @@
-cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Mosasaurus","Elasmosaurus","Dunkleosteus","Pteranodon"}
+cores={"Brachiosaurus","Tyrannosaurus","Triceratops","Stegosaurus","Dilophosaurus","Velociraptor","Sarcosuchus","Mosasaurus","Elasmosaurus","Dunkleosteus","Pteranodon"}
 cores2={"Mammoth","Elasmotherium","Smilodon","Direwolf","Procoptodon","Thylacoleo"}
 cores3={"Horsetails","Cycad"}
 local fossil_analyzer_fs = "size[8,7]"
