@@ -104,9 +104,9 @@ end
 mobs:register_egg("paleotest:mammoth", S("Mammoth"), "default_dirt.png", 1)
 
 minetest.register_craftitem("paleotest:Mammoth_baby", {
-	description = "Mammoth Calf",
-	inventory_image = "mobs_chicken_egg.png",
-	wield_image = "mobs_chicken_egg.png",
+	description = "Mammoth Embryonic Sac",
+	inventory_image = "paleotest_embryo.png",
+	wield_image = "paleotest_embryo.png",
 	stack_max = 1,
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)

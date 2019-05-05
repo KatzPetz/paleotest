@@ -138,9 +138,9 @@ mobs:register_egg("paleotest:smilodon", S("Smilodon"), "farming_straw.png", 1)
 -- Smilodon Cub by ElCeejo
 
 minetest.register_craftitem("paleotest:Smilodon_baby", {
-	description = "Smilodon Cub",
-	inventory_image = "mobs_chicken_egg.png",
-	wield_image = "mobs_chicken_egg.png",
+	description = "Smilodon Embryonic Sac",
+	inventory_image = "paleotest_embryo.png",
+	wield_image = "paleotest_embryo.png",
 	stack_max = 1,
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)

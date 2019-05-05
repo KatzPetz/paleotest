@@ -116,9 +116,9 @@ mobs:register_egg("paleotest:mosasaurus", S("Mosasaurus"), "default_water.png", 
 -- Mosasaurus Baby by ElCeejo
 
 minetest.register_craftitem("paleotest:Mosasaurus_baby", {
-	description = "Mosasaurus Hatchling",
-	inventory_image = "mobs_chicken_egg.png",
-	wield_image = "mobs_chicken_egg.png",
+	description = "Mosasaurus Embryonic Sac",
+	inventory_image = "paleotest_embryo.png",
+	wield_image = "paleotest_embryo.png",
 	stack_max = 1,
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)

@@ -105,9 +105,9 @@ end
 mobs:register_egg("paleotest:procoptodon", S("Procoptodon"), "default_dry_grass.png", 1)
 
 minetest.register_craftitem("paleotest:Procoptodon_baby", {
-	description = "Procoptodon Joey",
-	inventory_image = "mobs_chicken_egg.png",
-	wield_image = "mobs_chicken_egg.png",
+	description = "Procoptodon Embryonic Sac",
+	inventory_image = "paleotest_embryo.png",
+	wield_image = "paleotest_embryo.png",
 	stack_max = 1,
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
