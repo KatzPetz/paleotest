@@ -1,21 +1,18 @@
 
 local S = mobs.intllib
 
-local select_animation_set = function(animation_type)
-	if animation_type == "water" then
-		return {
+local animation_water = {
 		speed_normal = 10,
 		speed_sprint = 20,
-		stand_start = 50,
-		stand_end = 120,
+		stand_start = 150,
+		stand_end = 170,
 		walk_start = 150,
 		walk_end = 170,
 		punch_start = 130,
 		punch_end = 145,
 		punch_loop = false,
 		}
-	elseif animation_type == "land" then
-		return {
+local animation_land = {
 		speed_normal = 10,
 		speed_sprint = 20,
 		stand_start = 50,
@@ -26,8 +23,6 @@ local select_animation_set = function(animation_type)
 		punch_end = 145,
 		punch_loop = false,
 		}
-	end
-end
 
 -- Sarcosuchus by ElCeejo
 
@@ -43,6 +38,8 @@ mobs:register_mob("paleotest:sarcosuchus", {
         jump = false,
         jump_height = 1.1,
         stepheight = 1.1,
+        fly = true,
+        fly_in = "default:water_source",
         runaway = false,
         pushable = false,
         view_range = 4,
@@ -55,7 +52,7 @@ mobs:register_mob("paleotest:sarcosuchus", {
 	lava_damage = 3,
 	light_damage = 0,
         suffocation = false,
-        floats = 1,
+        floats = 0,
 	owner = "",
 	order = "follow",
 	follow = {"mobs:meat_raw"},
@@ -124,38 +121,21 @@ mobs:register_mob("paleotest:sarcosuchus", {
 
 	local nodef = minetest.registered_nodes[self.standing_in]
 
-	if self.fly then
+        if nodef.groups.water then
 
-		local s = self.object:get_pos()
-
-		if not self:attempt_flight_correction() then
-
-			self.fly = false
-                        self.floats = 0
-
-			return
-		end
-	end
-
-	if nodef.groups.water then
-
-	self.animation = select_animation_set("water")
-        self.view_range = 20
-        self.walk_chance = 100
-        self.fall_speed = -0.2
-        self.fly = true
+        self.fly = true     
         self.fly_in = "default:water_source"
-        floats = 0
-                        return
-		end
+        self.floats = 0
+        self.view_range = 12
+        self.walk_chance = 100
+        self.animation = animation_water
+	elseif not self:attempt_flight_correction() then
 
-	if nodef.groups.water ~= false then
-
-	self.animation = select_animation_set("land")
+        self.fly = false
+        self.floats = 0
         self.view_range = 4
         self.walk_chance = 10
-        self.fall_speed = -8
-        self.fly = false
+        self.animation = animation_land
                         return
 		end
 
