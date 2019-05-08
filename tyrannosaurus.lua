@@ -17,7 +17,7 @@ mobs:register_mob("paleotest:tyrannosaurus", {
         stepheight = 1.5,
         runaway = false,
         pushable = false,
-        view_range = 10,
+        view_range = 18,
         knock_back = 0,
         damage = 19,
 	fear_height = 6,
@@ -37,8 +37,8 @@ mobs:register_mob("paleotest:tyrannosaurus", {
         attack_npcs = true,
         attack_players = true,
         owner_loyal = true,
-        group_attack = true,
 	attack_type = "dogfight",
+        group_attack = true,
 	pathfinding = 1,
 	makes_footstep_sound = true,
 	sounds = {
@@ -95,21 +95,21 @@ mobs:register_mob("paleotest:tyrannosaurus", {
 	if self.child == true then
 
 	self.type = "animal"
-	passive = false
-        attack_animals = false
-	walk_velocity = 0.7
-	run_velocity = 0.7
+	self.passive = true
+        self.attack_animals = false
+	self.walk_velocity = 0.7
+	self.run_velocity = 0.7
 			return
 		end
 
 	if self.tamed == true then
 
-	self.type = "npc"
-	passive = false
-        attack_animals = true
-        attack_monsters = true
-        attack_players = true
-        owner_loyal = true
+	self.type = "animal"
+	self.passive = false
+        self.attack_animals = true
+        self.attack_monsters = true
+        self.attack_players = true
+        self.owner_loyal = true
 			return
 		end
 	end,

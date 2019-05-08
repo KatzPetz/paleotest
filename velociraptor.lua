@@ -95,21 +95,21 @@ mobs:register_mob("paleotest:velociraptor", {
 	if self.child == true then
 
 	self.type = "animal"
-	passive = false
-        attack_animals = false
-	walk_velocity = 0.7
-	run_velocity = 0.7
+	self.passive = true
+        self.attack_animals = false
+	self.walk_velocity = 0.4
+	self.run_velocity = 0.4
 			return
 		end
 
 	if self.tamed == true then
 
-	self.type = "npc"
-	passive = false
-        attack_animals = true
-        attack_monsters = true
-        attack_players = true
-        owner_loyal = true
+	self.type = "animal"
+	self.passive = false
+        self.attack_animals = true
+        self.attack_monsters = true
+        self.attack_players = true
+        self.owner_loyal = true
 			return
 		end
 	end,

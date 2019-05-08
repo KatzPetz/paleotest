@@ -14,7 +14,7 @@ mobs:register_mob("paleotest:procoptodon", {
         walk_chance = 10,
         jump = true,
         jump_height = 4,
-        stepheight = 1.1,
+        stepheight = 2,
         runaway = false,
         pushable = true,
         view_range = 5,
@@ -81,6 +81,19 @@ mobs:register_mob("paleotest:procoptodon", {
 
 		end
 
+	end,
+
+	do_custom = function(self, dtime)
+
+	if self.child == true then
+
+	self.type = "animal"
+	self.passive = true
+        self.attack_animals = false
+	self.walk_velocity = 0.7
+	self.run_velocity = 0.7
+			return
+		end
 	end,
 })
 

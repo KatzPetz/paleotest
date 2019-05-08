@@ -29,7 +29,7 @@ mobs:register_mob("paleotest:triceratops", {
         suffocation = false,
         floats = 1,
 	follow = {"default:leaves"},
-        reach = 10,
+        reach = 4,
         owner_loyal = true,
 	attack_type = "dogfight",
 	pathfinding = 0,
@@ -81,6 +81,19 @@ mobs:register_mob("paleotest:triceratops", {
 
 		end
 
+	end,
+
+	do_custom = function(self, dtime)
+
+	if self.child == true then
+
+	self.type = "animal"
+	self.passive = true
+        self.attack_animals = false
+	self.walk_velocity = 0.7
+	self.run_velocity = 0.7
+			return
+		end
 	end,
 })
 

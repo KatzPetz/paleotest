@@ -1,6 +1,34 @@
 
 local S = mobs.intllib
 
+local select_animation_set = function(animation_type)
+	if animation_type == "water" then
+		return {
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 50,
+		stand_end = 120,
+		walk_start = 150,
+		walk_end = 170,
+		punch_start = 130,
+		punch_end = 145,
+		punch_loop = false,
+		}
+	elseif animation_type == "land" then
+		return {
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 50,
+		stand_end = 120,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 130,
+		punch_end = 145,
+		punch_loop = false,
+		}
+	end
+end
+
 -- Sarcosuchus by ElCeejo
 
 mobs:register_mob("paleotest:sarcosuchus", {
@@ -17,13 +45,13 @@ mobs:register_mob("paleotest:sarcosuchus", {
         stepheight = 1.1,
         runaway = false,
         pushable = false,
-        view_range = 8,
+        view_range = 4,
         knock_back = 0,
         damage = 13,
 	fear_height = 6,
 	fall_speed = -8,
 	fall_damage = 15,
-	water_damage = -1,
+	water_damage = 0,
 	lava_damage = 3,
 	light_damage = 0,
         suffocation = false,
@@ -90,26 +118,56 @@ mobs:register_mob("paleotest:sarcosuchus", {
 
 	end,
 
-	do_custom = function(self, dtime)
+	do_custom = function(self, dtime, nodef)
+
+-- Mob changes animation and can swim in water
+
+	local nodef = minetest.registered_nodes[self.standing_in]
+
+	if self.fly then
+
+		local s = self.object:get_pos()
+
+		if not self:attempt_flight_correction() then
+
+			self.fly = false
+                        self.floats = 0
+
+			return
+		end
+	end
+
+	if nodef.groups.water then
+
+	self.animation = select_animation_set("water")
+        self.view_range = 20
+        self.walk_chance = 100
+        self.fall_speed = -0.2
+        self.fly = true
+        self.fly_in = "default:water_source"
+        floats = 0
+                        return
+		end
+
+	if nodef.groups.water ~= false then
+
+	self.animation = select_animation_set("land")
+        self.view_range = 4
+        self.walk_chance = 10
+        self.fall_speed = -8
+        self.fly = false
+                        return
+		end
+
+-- Behaviour for young mobs
 
 	if self.child == true then
 
 	self.type = "animal"
-	passive = false
-        attack_animals = false
-	walk_velocity = 0.7
-	run_velocity = 0.7
-			return
-		end
-
-	if self.tamed == true then
-
-	self.type = "npc"
-	passive = false
-        attack_animals = true
-        attack_monsters = true
-        attack_players = true
-        owner_loyal = true
+	self.passive = true
+        self.attack_animals = false
+	self.walk_velocity = 0.3
+	self.run_velocity = 0.3
 			return
 		end
 	end,

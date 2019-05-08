@@ -31,7 +31,7 @@ mobs:register_mob("paleotest:elasmosaurus", {
         suffocation = false,
         floats = 0,
         reach = 3,
-        attack_chance = 00,
+        attack_chance = 0,
         attack_animals = false,
         attack_npcs = false,
         attack_players = false,
@@ -48,7 +48,7 @@ mobs:register_mob("paleotest:elasmosaurus", {
 	},
 	visual = "mesh",
 	visual_size = {x=15, y=15},
-	collisionbox = {-1.5, -1.5, -1.5, 1.5, 1.5, 1.5},
+	collisionbox = {-0.85, -0.85, -0.85, 0.85, 0.85, 0.85},
 	textures = {
 		{"paleotest_elasmosaurus1.png"},
 		{"paleotest_elasmosaurus2.png"},
@@ -71,21 +71,10 @@ mobs:register_mob("paleotest:elasmosaurus", {
 	if self.child == true then
 
 	self.type = "animal"
-	passive = false
-        attack_animals = false
-	walk_velocity = 0.7
-	run_velocity = 0.7
-			return
-		end
-
-	if self.tamed == true then
-
-	self.type = "npc"
-	passive = false
-        attack_animals = true
-        attack_monsters = true
-        attack_players = true
-        owner_loyal = true
+	self.passive = true
+        self.attack_animals = false
+	self.walk_velocity = 0.7
+	self.run_velocity = 0.7
 			return
 		end
 	end,
