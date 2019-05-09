@@ -32,8 +32,8 @@ dofile(path .. "/dire_wolf.lua")
 dofile(path .. "/dunkleosteus.lua")
 dofile(path .. "/elasmosaurus.lua")
 dofile(path .. "/mosasaurus.lua")
-dofile(path .. "/sarcosuchus.lua)
+dofile(path .. "/sarcosuchus.lua")
 dofile(path .. "/pteranodon.lua")
 
 
-minetest.log("action", "[MOD] PaleoTest v1.2 loaded")
+minetest.log("action", "[MOD] PaleoTest v1.21 loaded")
