@@ -1,6 +1,34 @@
 
 local S = mobs.intllib
 
+-- Sleeping and Awake animation sets
+
+local animation_awake = {
+		speed_normal = 30,
+		speed_sprint = 60,
+		stand_start = 50,
+		stand_end = 110,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 125,
+		punch_end = 145,
+		punch_start = 125,
+		punch_end = 135,
+		sleep_start = 135,
+		sleep_end = 160,
+		punch_loop = false,
+		}
+local animation_sleep = {
+                stand_speed = 5,
+		speed_normal = 30,
+		speed_sprint = 60,
+		walk_start = 140,
+		walk_end = 160,
+		stand_start = 140,
+		stand_end = 160,
+		punch_loop = false,
+		}
+
 -- Velociraptor by ElCeejo
 
 mobs:register_mob("paleotest:velociraptor", {
@@ -59,14 +87,19 @@ mobs:register_mob("paleotest:velociraptor", {
 	},
 	mesh = "paleotest_velociraptor.b3d",
 	animation = {
+                stand_speed = 5,
 		speed_normal = 30,
 		speed_sprint = 60,
 		stand_start = 50,
 		stand_end = 110,
+		stand1_start = 140,
+		stand1_end = 160,
 		walk_start = 1,
 		walk_end = 40,
 		punch_start = 125,
 		punch_end = 145,
+		punch_start = 125,
+		punch_end = 135,
 		punch_loop = false,
 	},
 
@@ -91,6 +124,31 @@ mobs:register_mob("paleotest:velociraptor", {
 	end,
 
 	do_custom = function(self, dtime)
+
+-- Nocturnal mobs sleep at day and awake at night
+
+	if self.time_of_day > 0.2
+	and self.time_of_day < 0.8 then
+
+        self.passive = true     
+        self.view_range = 0
+        self.walk_chance = 0
+        self.jump = false
+        self.animation = animation_sleep
+        mobs:set_animation(self, self.animation.stand)
+	elseif self.time_of_day > 0.0
+	and self.time_of_day < 1.0 then
+
+        self.passive = false    
+        self.view_range = 10
+        self.walk_chance = 20
+        self.jump = true
+        self.animation = animation_awake
+        mobs:set_animation(self, self.animation.current)
+                        return
+		end
+
+-- Baby mobs are passive, Tamed mobs will protect their owner
 
 	if self.child == true then
 

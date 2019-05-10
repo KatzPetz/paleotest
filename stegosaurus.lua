@@ -1,6 +1,30 @@
 
 local S = mobs.intllib
 
+-- Sleeping and Awake animation sets
+
+local animation_awake = {
+		speed_normal = 18,
+		speed_sprint = 30,
+		stand_start = 50,
+		stand_end = 120,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 130,
+		punch_end = 140,
+		punch_loop = false,
+		}
+local animation_sleep = {
+                stand_speed = 5,
+		speed_normal = 18,
+		speed_sprint = 30,
+		stand_start = 145,
+		stand_end = 160,
+		walk_start = 145,
+		walk_end = 160,
+		punch_loop = false,
+		}
+
 -- Stegosaurus by ElCeejo
 
 mobs:register_mob("paleotest:stegosaurus", {
@@ -84,6 +108,30 @@ mobs:register_mob("paleotest:stegosaurus", {
 	end,
 
 	do_custom = function(self, dtime)
+
+-- Diurnal mobs sleep at night and awake at day
+
+	if self.time_of_day > 0.2
+	and self.time_of_day < 0.8 then
+
+        self.passive = false    
+        self.view_range = 10
+        self.walk_chance = 20
+        self.jump = true
+        self.animation = animation_awake
+	mobs:set_animation(self, self.animation.current)
+	elseif self.time_of_day > 0.0
+	and self.time_of_day < 1.0 then
+
+        self.passive = true     
+        self.view_range = 0
+        self.walk_chance = 0
+        self.jump = false
+        self.animation = animation_sleep
+	mobs:set_animation(self, self.animation.current)
+	end
+
+-- Baby mobs are passive
 
 	if self.child == true then
 

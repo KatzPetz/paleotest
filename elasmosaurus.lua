@@ -1,6 +1,24 @@
 
 local S = mobs.intllib
 
+local	animation_beached = {
+		speed_normal = 125,
+		speed_sprint = 125,
+		stand_start = 125,
+		stand_end = 125,
+		walk_start = 125,
+		walk_end = 125,
+}
+
+local	animation_swimming = {
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 1,
+		stand_end = 120,
+		walk_start = 1,
+		walk_end = 40,
+}
+
 -- Elasmosaurus by ElCeejo
 
 mobs:register_mob("paleotest:elasmosaurus", {
@@ -38,7 +56,12 @@ mobs:register_mob("paleotest:elasmosaurus", {
         owner_loyal = false,
         group_attack = false,
 	attack_type = "dogfight",
-	pathfinding = 1,
+	pathfinding = 1,		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 1,
+		stand_end = 120,
+		walk_start = 1,
+		walk_end = 40,
 	makes_footstep_sound = true,
 	sounds = {
 		random = "paleotest_elasmosaurus",
@@ -67,6 +90,30 @@ mobs:register_mob("paleotest:elasmosaurus", {
 	},
 
 	do_custom = function(self, dtime)
+
+-- Aquatic Mobs get beached
+
+	if not self:attempt_flight_correction() then
+
+        self.fly = false
+        self.view_range = 0
+        self.walk_chance = 0
+        self.animation = animation_beached
+        self.pushable = true
+                        return
+		end
+
+	if self:attempt_flight_correction() then
+
+        self.fly = true
+        self.view_range = 15
+        self.walk_chance = 100
+        self.animation = animation_swimming
+        self.pushable = false
+                        return
+		end
+
+-- Baby mobs are passive
 
 	if self.child == true then
 

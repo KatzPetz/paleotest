@@ -1,6 +1,30 @@
 
 local S = mobs.intllib
 
+-- Sleeping and Awake animation sets
+
+local animation_awake = {
+		speed_normal = 15,
+		speed_sprint = 30,
+		stand_start = 50,
+		stand_end = 120,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 125,
+		punch_end = 145,
+		punch_loop = false,
+		}
+local animation_sleep = {
+                stand_speed = 5,
+		speed_normal = 15,
+		speed_sprint = 30,
+		stand_start = 175,
+		stand_end = 190,
+		walk_start = 175,
+		walk_end = 190,
+		punch_loop = false,
+		}
+
 -- Triceratops by ElCeejo
 
 mobs:register_mob("paleotest:triceratops", {
@@ -84,6 +108,30 @@ mobs:register_mob("paleotest:triceratops", {
 	end,
 
 	do_custom = function(self, dtime)
+
+-- Diurnal mobs sleep at night and awake at day
+
+	if self.time_of_day > 0.2
+	and self.time_of_day < 0.8 then
+
+        self.passive = false    
+        self.view_range = 10
+        self.walk_chance = 25
+        self.jump = true
+        self.animation = animation_awake
+	mobs:set_animation(self, self.animation.current)
+	elseif self.time_of_day > 0.0
+	and self.time_of_day < 1.0 then
+
+        self.passive = true     
+        self.view_range = 0
+        self.walk_chance = 0
+        self.jump = false
+        self.animation = animation_sleep
+	mobs:set_animation(self, self.animation.current)
+	end
+
+-- Baby mobs are passive
 
 	if self.child == true then
 

@@ -1,6 +1,32 @@
 
 local S = mobs.intllib
 
+-- Sleeping and Awake animation sets
+
+local animation_awake = {
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 50,
+		stand_end = 110,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 120,
+		punch_end = 150,
+		punch_loop = false,
+		}
+local animation_sleep = {
+                stand_speed = 5,
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 195,
+		stand_end = 210,
+		walk_start = 195,
+		walk_end = 210,
+		punch_loop = false,
+		}
+
+-- Land and Water animation sets
+
 local animation_water = {
 	        speed_normal = 10,
 	        speed_sprint = 20,
@@ -118,6 +144,28 @@ mobs:register_mob("paleotest:spinosaurus", {
 
 	do_custom = function(self, dtime, nodef)
 
+-- Diurnal mobs sleep at night and awake at day
+
+	if self.time_of_day > 0.2
+	and self.time_of_day < 0.8 then
+
+        self.passive = false    
+        self.view_range = 4
+        self.walk_chance = 10
+        self.jump = true
+        self.animation = animation_awake
+	mobs:set_animation(self, self.animation.current)
+	elseif self.time_of_day > 0.0
+	and self.time_of_day < 1.0 then
+
+        self.passive = true     
+        self.view_range = 0
+        self.walk_chance = 0
+        self.jump = false
+        self.animation = animation_sleep
+	mobs:set_animation(self, self.animation.current)
+	end
+
 -- Mob changes animation and can swim in water
 
 	local nodef = minetest.registered_nodes[self.standing_in]
@@ -140,7 +188,7 @@ mobs:register_mob("paleotest:spinosaurus", {
                         return
 		end
 
--- Behaviour for tamed and young mobs
+-- Baby mobs are passive, Tamed mobs will protect their owner
 
 	if self.child == true then
 

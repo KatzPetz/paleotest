@@ -1,6 +1,30 @@
 
 local S = mobs.intllib
 
+local	animation_beached = {
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 70,
+		stand_end = 70,
+		walk_start = 70,
+		walk_end = 70,
+		punch_start = 70,
+		punch_end = 70,
+		punch_loop = false,
+}
+
+local	animation_swimming = {
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 1,
+		stand_end = 40,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 50,
+		punch_end = 65,
+		punch_loop = false,
+}
+
 -- Dunkleosteus by ElCeejo
 
 mobs:register_mob("paleotest:dunkleosteus", {
@@ -70,6 +94,32 @@ mobs:register_mob("paleotest:dunkleosteus", {
 	},
 
 	do_custom = function(self, dtime)
+
+-- Aquatic Mobs get beached
+
+	if not self:attempt_flight_correction() then
+
+        self.fly = false
+        self.passive = true
+        self.view_range = 0
+        self.walk_chance = 0
+        self.animation = animation_beached
+        self.pushable = true
+                        return
+		end
+
+	if self:attempt_flight_correction() then
+
+        self.fly = true
+        self.passive = false
+        self.view_range = 4
+        self.walk_chance = 100
+        self.animation = animation_swimming
+        self.pushable = false
+                        return
+		end
+
+-- Baby mobs are passive
 
 	if self.child == true then
 

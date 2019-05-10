@@ -1,6 +1,30 @@
 
 local S = mobs.intllib
 
+-- Sleeping and Awake animation sets
+
+local animation_awake = {
+		speed_normal = 15,
+		speed_sprint = 20,
+		stand_start = 50,
+		stand_end = 120,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 130,
+		punch_end = 145,
+		punch_loop = false,
+		}
+local animation_sleep = {
+                stand_speed = 5,
+		speed_normal = 30,
+		speed_sprint = 60,
+		walk_start = 165,
+		walk_end = 180,
+		stand_start = 165,
+		stand_end = 180,
+		punch_loop = false,
+		}
+
 -- Tyrannosaurus by ElCeejo
 
 mobs:register_mob("paleotest:tyrannosaurus", {
@@ -50,10 +74,7 @@ mobs:register_mob("paleotest:tyrannosaurus", {
 	visual = "mesh",
 	visual_size = {x=15, y=15},
 	collisionbox = {-1.3, -1.0, -1.3, 1.3, 1.8, 1.3},
-	textures = {
-		{"paleotest_tyrannosaurus1.png"},
-		{"paleotest_tyrannosaurus2.png"},
-	},
+	textures = textures_awake,
 	child_texture = {
 		{"paleotest_tyrannosaurus3.png"},
 	},
@@ -91,6 +112,30 @@ mobs:register_mob("paleotest:tyrannosaurus", {
 	end,
 
 	do_custom = function(self, dtime)
+
+-- Diurnal mobs sleep at night and awake at day
+
+	if self.time_of_day > 0.2
+	and self.time_of_day < 0.8 then
+
+        self.passive = false    
+        self.view_range = 18
+        self.walk_chance = 35
+        self.jump = true
+        self.animation = animation_awake
+	mobs:set_animation(self, self.animation.current)
+	elseif self.time_of_day > 0.0
+	and self.time_of_day < 1.0 then
+
+        self.passive = true     
+        self.view_range = 0
+        self.walk_chance = 0
+        self.jump = false
+        self.animation = animation_sleep
+	mobs:set_animation(self, self.animation.current)
+	end
+
+-- Baby mobs are passive, Tamed mobs will protect their owner
 
 	if self.child == true then
 

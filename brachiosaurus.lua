@@ -1,6 +1,30 @@
 
 local S = mobs.intllib
 
+-- Sleeping and Awake animation sets
+
+local animation_awake = {
+		speed_normal = 15,
+		speed_sprint = 30,
+		stand_start = 60,
+		stand_end = 140,
+		walk_start = 1,
+		walk_end = 50,
+		punch_start = 150,
+		punch_end = 180,
+		punch_loop = false,
+		}
+local animation_sleep = {
+                stand_speed = 5,
+		speed_normal = 15,
+		speed_sprint = 30,
+		stand_start = 185,
+		stand_end = 200,
+		walk_start = 185,
+		walk_end = 200,
+		punch_loop = false,
+		}
+
 -- Brachiosaurus by ElCeejo
 
 mobs:register_mob("paleotest:brachiosaurus", {
@@ -84,6 +108,28 @@ mobs:register_mob("paleotest:brachiosaurus", {
 	end,
 
 	do_custom = function(self, dtime)
+
+-- Diurnal mobs sleep at night and awake at day
+
+	if self.time_of_day > 0.2
+	and self.time_of_day < 0.8 then
+   
+        self.view_range = 10
+        self.walk_chance = 10
+        self.jump = false
+        self.animation = animation_awake
+	mobs:set_animation(self, self.animation.current)
+	elseif self.time_of_day > 0.0
+	and self.time_of_day < 1.0 then
+     
+        self.view_range = 0
+        self.walk_chance = 0
+        self.jump = false
+        self.animation = animation_sleep
+	mobs:set_animation(self, self.animation.current)
+	end
+
+-- Baby mobs are passive
 
 	if self.child == true then
 
