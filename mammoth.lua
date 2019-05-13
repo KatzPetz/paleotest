@@ -1,23 +1,44 @@
 
 local S = mobs.intllib
 
+local animation_awake = {
+		speed_normal = 10,
+		speed_sprint = 30,
+		stand_start = 50,
+		stand_end = 150,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 160,
+		punch_end = 200,
+		punch_loop = false,
+		}
+local animation_sleep = {
+		speed_stand = 5,
+		speed_normal = 10,
+		speed_sprint = 30,
+		stand_start = 205,
+		stand_end = 230,
+		walk_start = 205,
+		walk_end = 230,
+		}
+
 -- Mammoth by ElCeejo
 
 mobs:register_mob("paleotest:mammoth", {
 	type = "animal",
 	hp_min = 54,
 	hp_max = 54,
-	armor = 115,
+	armor = 115,-- Baby mobs are passive, Tamed mobs will protect their owner
 	passive = false,
 	walk_velocity = 0.8,
 	run_velocity = 3,
-        walk_chance = 10,
+        walk_chance = 40,
         jump = true,
         jump_height = 1.0,
         stepheight = 1.1,
         runaway = false,
         pushable = false,
-        view_range = 5,
+        view_range = 8,
         knock_back = 0,
         damage = 13,
 	fear_height = 6,
@@ -84,6 +105,30 @@ mobs:register_mob("paleotest:mammoth", {
 	end,
 
 	do_custom = function(self, dtime)
+
+-- Diurnal mobs sleep at night and awake at day
+
+	if self.time_of_day > 0.2
+	and self.time_of_day < 0.8 then
+
+        self.passive = false    
+        self.view_range = 8
+        self.walk_chance = 40
+        self.jump = false
+        self.animation = animation_awake
+	mobs:set_animation(self, self.animation.current)
+	elseif self.time_of_day > 0.0
+	and self.time_of_day < 1.0 then
+
+        self.passive = true     
+        self.view_range = 0
+        self.walk_chance = 0
+        self.jump = false
+        self.animation = animation_sleep
+	mobs:set_animation(self, self.animation.current)
+	end
+
+-- Baby mobs are passive
 
 	if self.child == true then
 

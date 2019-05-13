@@ -93,6 +93,8 @@ mobs:register_mob("paleotest:thylacoleo", {
 
 	do_custom = function(self, dtime)
 
+-- Baby mobs are passive, Tamed mobs will protect their owner
+
 	if self.child == true then
 
 	self.type = "animal"

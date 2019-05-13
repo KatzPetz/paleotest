@@ -1,6 +1,34 @@
 
 local S = mobs.intllib
 
+-- Tamed and Wild animation sets
+
+local animation_wild = {
+		speed_normal = 18,
+		speed_sprint = 20,
+		speed_punch = 5,
+		stand_start = 50,
+		stand_end = 120, -- 20
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 130,
+		punch_end = 145,
+		punch_loop = false,
+		}
+local animation_tamed = {
+                stand_speed = 5,
+		speed_normal = 18,
+		speed_sprint = 20,
+		speed_punch = 5,
+		stand_start = 150,
+		stand_end = 180,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 130,
+		punch_end = 145,
+		punch_loop = false,
+		}
+
 -- Dire Wolf by ElCeejo
 
 mobs:register_mob("paleotest:dire_wolf", {
@@ -53,9 +81,10 @@ mobs:register_mob("paleotest:dire_wolf", {
 	textures = {
 		{"paleotest_dire_wolf1.png"},
 		{"paleotest_dire_wolf2.png"},
+		{"paleotest_dire_wolf3.png"},
 	},
 	child_texture = {
-		{"paleotest_dire_wolf3.png"},
+		{"paleotest_dire_wolf4.png"},
 	},
 	mesh = "paleotest_dire_wolf.b3d",
 	animation = {
@@ -80,11 +109,14 @@ mobs:register_mob("paleotest:dire_wolf", {
 		if self.owner == "" then
 			self.owner = clicker:get_player_name()
 		else
-			if self.order == "follow" then
-				self.order = "stand"
+			if self.order == "roam" then
+				self.order = "sit"
+                                self.walk_chance = 0
+                                self.animation =  animation_tamed
+                                mobs:set_animation(self, self.animation.stand)
 			else
-				self.order = "follow"
-
+				self.order = "roam"
+                                self.walk_chance = 15
 			end
 
 		end
@@ -92,6 +124,8 @@ mobs:register_mob("paleotest:dire_wolf", {
 	end,
 
 	do_custom = function(self, dtime)
+
+-- Baby mobs are passive, Tamed mobs will protect their owner
 
 	if self.child == true then
 
@@ -111,6 +145,8 @@ mobs:register_mob("paleotest:dire_wolf", {
         self.attack_monsters = true
         self.attack_players = true
         self.owner_loyal = true
+        self.animation =  animation_tamed
+	mobs:set_animation(self, self.animation.current)
 			return
 		end
 	end,

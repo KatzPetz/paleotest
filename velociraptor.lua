@@ -139,7 +139,7 @@ mobs:register_mob("paleotest:velociraptor", {
 	elseif self.time_of_day > 0.0
 	and self.time_of_day < 1.0 then
 
-        self.passive = false    
+        self.passive = true  
         self.view_range = 10
         self.walk_chance = 20
         self.jump = true

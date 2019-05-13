@@ -1,6 +1,9 @@
 
 local S = mobs.intllib
 
+-- Land and Water animation sets
+
+
 local animation_water = {
 		speed_normal = 10,
 		speed_sprint = 20,

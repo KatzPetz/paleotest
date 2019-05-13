@@ -1,6 +1,8 @@
 
 local S = mobs.intllib
 
+-- Beached and Swimming animations
+
 local	animation_beached = {
 		speed_normal = 10,
 		speed_sprint = 20,

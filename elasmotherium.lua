@@ -1,6 +1,27 @@
 
 local S = mobs.intllib
 
+local animation_awake = {
+		speed_normal = 10,
+		speed_sprint = 30,
+		stand_start = 50,
+		stand_end = 120,
+		walk_start = 1,
+		walk_end = 40,
+		punch_start = 130,
+		punch_end = 150,
+		punch_loop = false,
+		}
+local animation_sleep = {
+		speed_stand = 5,
+		speed_normal = 10,
+		speed_sprint = 30,
+		stand_start = 155,
+		stand_end = 180,
+		walk_start = 155,
+		walk_end = 180,
+		}
+
 -- Elasmotherium by ElCeejo
 
 mobs:register_mob("paleotest:elasmotherium", {
@@ -10,7 +31,7 @@ mobs:register_mob("paleotest:elasmotherium", {
 	armor = 105,
 	passive = false,
 	walk_velocity = 0.7,
-	run_velocity = 4,
+	run_velocity = 3,
         walk_chance = 10,
         jump = false,
         jump_height = 1.1,
@@ -84,6 +105,30 @@ mobs:register_mob("paleotest:elasmotherium", {
 	end,
 
 	do_custom = function(self, dtime)
+
+-- Diurnal mobs sleep at night and awake at day
+
+	if self.time_of_day > 0.2
+	and self.time_of_day < 0.8 then
+
+        self.passive = false    
+        self.view_range = 4
+        self.walk_chance = 10
+        self.jump = false
+        self.animation = animation_awake
+	mobs:set_animation(self, self.animation.current)
+	elseif self.time_of_day > 0.0
+	and self.time_of_day < 1.0 then
+
+        self.passive = true     
+        self.view_range = 0
+        self.walk_chance = 0
+        self.jump = false
+        self.animation = animation_sleep
+	mobs:set_animation(self, self.animation.current)
+	end
+
+-- Baby mobs are passive
 
 	if self.child == true then
 

@@ -1,6 +1,25 @@
 
 local S = mobs.intllib
 
+-- Walking and Flying animation sets
+
+local animation_fly = {
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 50,
+		stand_end = 90,
+		walk_start = 1,
+		walk_end = 40,
+		}
+local animation_land = {
+		speed_normal = 10,
+		speed_sprint = 20,
+		stand_start = 125,
+		stand_end = 165,
+		walk_start = 100,
+		walk_end = 120,
+		}
+
 -- Pteranodon by ElCeejo
 
 mobs:register_mob("paleotest:pteranodon", {
@@ -9,9 +28,9 @@ mobs:register_mob("paleotest:pteranodon", {
 	hp_max = 16,
 	armor = 180,
 	passive = true,
-	walk_velocity = 1.0,
+	walk_velocity = 1,
 	run_velocity = 3,
-        walk_chance = 90,
+        walk_chance = 50,
         jump = false,
         jump_height = 1.1,
         stepheight = 1.1,
@@ -25,7 +44,7 @@ mobs:register_mob("paleotest:pteranodon", {
 	fear_height = 0,
 	fall_speed = -8,
 	fall_damage = 0,
-	water_damage = 0,
+	water_damage = 3,
 	lava_damage = 3,
 	light_damage = 0,
         suffocation = false,
@@ -50,11 +69,11 @@ mobs:register_mob("paleotest:pteranodon", {
 	visual_size = {x=10, y=10},
 	collisionbox = {-0.3, -0.5, -0.3, 0.3, 0.2, 0.3},
 	textures = {
-		{"paleotest_pteranodon.png"},
-		{"paleotest_pteranodon.png"},
+		{"paleotest_pteranodon1.png"},
+		{"paleotest_pteranodon2.png"},
 	},
 	child_texture = {
-		{"paleotest_pteranodon.png"},
+		{"paleotest_pteranodon3.png"},
 	},
 	mesh = "paleotest_pteranodon.b3d",
 	animation = {
@@ -66,7 +85,93 @@ mobs:register_mob("paleotest:pteranodon", {
 		walk_end = 40,
 	},
 
-	do_custom = function(self, dtime)
+	do_custom = function(self)
+
+-- Fliers will ocassionally land
+
+        local floor = math.floor
+        local pos = self.object:get_pos()
+
+
+	if math.random(1, 500) == 1 then
+
+        self.fly = false
+        self.fly2 = false
+        self.disable_falling = false
+	self.fall_speed = -8
+        self.animation = animation_land
+                       return
+		end
+ 
+        if math.random(1, 250) == 1
+        and self.fly == false then
+
+        self.fly2 = true
+	self.disable_falling = true
+        self.animation = animation_fly
+                        return
+		end
+
+-- Force to fly after landing
+
+
+        if self.fly2 == true then
+
+	local p = self.object:get_pos()
+	local s = self.object:get_pos()
+	local p1 = s
+	local me_y = floor(p1.y)
+	local p2 = p
+	local p_y = floor(p2.y + 1)
+	local v = self.object:get_velocity()
+
+	if self:flight_check() then
+
+		if me_y < p_y then
+
+			self.object:set_velocity({
+				x = v.x,
+				y = 0.1 * self.walk_velocity,
+				z = v.z
+			})
+
+		elseif me_y > p_y then
+
+			self.object:set_velocity({
+				x = v.x,
+				y = -1 * self.walk_velocity,
+				z = v.z
+			})
+		end
+	else
+		if me_y < p_y then
+
+		self.object:set_velocity({
+			        x = v.x,
+				y = 0.01,
+				z = v.z
+			})
+
+		elseif me_y > p_y then
+
+			self.object:set_velocity({
+				x = v.x,
+				y = -0.01,
+				z = v.z
+			})
+		end
+
+		if v.y > 0 then
+
+			self.object:set_acceleration({
+				x = 0,
+				y = 0,
+				z = 0
+			})
+                        return
+		end
+
+-- Baby mobs are passive
 
 	if self.child == true then
 
@@ -76,8 +181,10 @@ mobs:register_mob("paleotest:pteranodon", {
 	self.walk_velocity = 0.7
 	self.run_velocity = 0.7
 			return
+                        end
 		end
-	end,
+	end
+end,
 })
 
 local wild_spawn = minetest.settings:get_bool("wild_spawning")
