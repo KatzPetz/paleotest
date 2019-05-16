@@ -36,4 +36,4 @@ dofile(path .. "/sarcosuchus.lua")
 dofile(path .. "/pteranodon.lua")
 
 
-minetest.log("action", "[MOD] PaleoTest v1.30 loaded")
+minetest.log("action", "[MOD] PaleoTest v1.41 loaded")
