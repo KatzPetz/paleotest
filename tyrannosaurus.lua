@@ -74,7 +74,10 @@ mobs:register_mob("paleotest:tyrannosaurus", {
 	visual = "mesh",
 	visual_size = {x=15, y=15},
 	collisionbox = {-1.3, -1.0, -1.3, 1.3, 1.8, 1.3},
-	textures = textures_awake,
+	textures = {
+                {"paleotest_tyrannosaurus1.png"},
+                {"paleotest_tyrannosaurus2.png"},	
+	},		
 	child_texture = {
 		{"paleotest_tyrannosaurus3.png"},
 	},
